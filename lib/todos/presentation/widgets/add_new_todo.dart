@@ -10,42 +10,50 @@ class AddNewTodo extends ConsumerWidget {
   static void show(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      useRootNavigator: true,
+      isScrollControlled: true,
       builder: (_) => const AddNewTodo(),
     );
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      children: [
-        const SizedBox(height: 8),
-        Container(
-          height: 6,
-          width: 80,
-          decoration: BoxDecoration(
-            color: Colors.grey[350],
-            borderRadius: BorderRadius.circular(50),
+    final bottomInsets = MediaQuery.of(context).viewInsets.bottom;
+    final addNewTodoTextController = ref.watch(addNewTodoTextControllerProvider);
+
+    return SizedBox(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(height: 8),
+          Container(
+            height: 6,
+            width: 80,
+            decoration: BoxDecoration(
+              color: Colors.grey[350],
+              borderRadius: BorderRadius.circular(50),
+            ),
           ),
-        ),
-        TextField(
-          controller: ref.read(addNewTodoTextControllerProvider),
-          keyboardType: TextInputType.text,
-          textCapitalization: TextCapitalization.sentences,
-          minLines: 1,
-          maxLines: 20,
-        ),
-        TextButton(
-          onPressed: () {
-            final newTodo = Todo(
-              title: ref.read(addNewTodoTextControllerProvider).text,
-            );
-            final todosControllerNotifier = ref.read(todosControllerProvider.notifier);
-            todosControllerNotifier.addNewTodo(newTodo);
-          },
-          child: const Text('Add todo'),
-        ),
-      ],
+          TextField(
+            controller: addNewTodoTextController,
+            keyboardType: TextInputType.multiline,
+            textCapitalization: TextCapitalization.sentences,
+            minLines: 1,
+            maxLines: 5,
+          ),
+          TextButton(
+            onPressed: () {
+              final newTodo = Todo(
+                title: addNewTodoTextController.text,
+              );
+              ref.read(todosControllerProvider.notifier).addNewTodo(newTodo);
+              addNewTodoTextController.clear();
+            },
+            child: const Text('Add todo'),
+          ),
+          const SizedBox(height: 30),
+          SizedBox(height: bottomInsets),
+        ],
+      ),
     );
   }
 }
