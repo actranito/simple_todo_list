@@ -2,19 +2,19 @@ import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list/todos/domain/todo.dart';
-import 'package:todo_list/todos/presentation/controllers/todos_controller_state.dart';
+import 'package:todo_list/todos/todos_list/presentation/controllers/todos_list_controller_state.dart';
 
-final todosControllerProvider =
-    StateNotifierProvider.autoDispose<TodosController, TodosControllerState>((ref) => TodosController());
+final todosListControllerProvider =
+    StateNotifierProvider.autoDispose<TodosListController, TodosListControllerState>((ref) => TodosListController());
 
-class TodosController extends StateNotifier<TodosControllerState> {
-  TodosController() : super(const TodosControllerState.loading()) {
+class TodosListController extends StateNotifier<TodosListControllerState> {
+  TodosListController() : super(const TodosListControllerState.loading()) {
     _intialize();
   }
 
   void toggleCompleted(String? todoId) {
     final currentState = state;
-    if (currentState is! TodosControllerContentState || todoId == null) {
+    if (currentState is! TodosListControllerContentState || todoId == null) {
       // If we are not in the correct state, return.
       // TODO - add error toast
       return;
@@ -47,7 +47,7 @@ class TodosController extends StateNotifier<TodosControllerState> {
 
   void addNewTodo(Todo todo) {
     final currentState = state;
-    if (currentState is! TodosControllerContentState) {
+    if (currentState is! TodosListControllerContentState) {
       // If we are not in the correct state, return.
       // TODO - add error toast
       return;
@@ -102,9 +102,9 @@ class TodosController extends StateNotifier<TodosControllerState> {
       }
 
       await Future.delayed(const Duration(seconds: 2));
-      state = TodosControllerState.content(todosList: todosList);
+      state = TodosListControllerState.content(todosList: todosList);
     } catch (e) {
-      state = const TodosControllerState.error();
+      state = const TodosListControllerState.error();
     }
   }
 }

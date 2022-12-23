@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list/todos/domain/todo.dart';
-import 'package:todo_list/todos/presentation/controllers/todos_controller.dart';
-import 'package:todo_list/todos/providers/todo_full_info_modal_providers.dart';
+import 'package:todo_list/todos/edit_todo/presentation/providers/edit_todo_info_modal_providers.dart';
+import 'package:todo_list/todos/todos_list/presentation/controllers/todos_list_controller.dart';
 
-class TodoFullInfoModal extends ConsumerWidget {
-  const TodoFullInfoModal({super.key});
+class EditTodoInfoModal extends ConsumerWidget {
+  const EditTodoInfoModal({super.key});
 
   static void show({
     required BuildContext context,
@@ -13,19 +13,20 @@ class TodoFullInfoModal extends ConsumerWidget {
     Todo? originalTodo,
   }) {
     if (originalTodo != null) {
-      ref.read(selectedTodoProvider.notifier).state = originalTodo;
+      ref.watch(selectedTodoProvider.notifier).state = originalTodo;
     }
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (_) => const TodoFullInfoModal(),
+      builder: (_) => const EditTodoInfoModal(),
     );
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bottomInsets = MediaQuery.of(context).viewInsets.bottom;
-    final addNewTodoTextController = ref.watch(todoTitleTextController);
+    final todoTitleTextController = ref.watch(todoTitleTextControllerProvider);
+    final todoDescriptionTextController = ref.watch(todoDescriptionTextControllerProvider);
 
     return SizedBox(
       child: Column(
@@ -41,7 +42,14 @@ class TodoFullInfoModal extends ConsumerWidget {
             ),
           ),
           TextField(
-            controller: addNewTodoTextController,
+            controller: todoTitleTextController,
+            keyboardType: TextInputType.multiline,
+            textCapitalization: TextCapitalization.sentences,
+            minLines: 1,
+            maxLines: 5,
+          ),
+          TextField(
+            controller: todoDescriptionTextController,
             keyboardType: TextInputType.multiline,
             textCapitalization: TextCapitalization.sentences,
             minLines: 1,
@@ -50,11 +58,11 @@ class TodoFullInfoModal extends ConsumerWidget {
           TextButton(
             onPressed: () {
               final newTodo = Todo(
-                title: addNewTodoTextController.text,
-                description: '',
+                title: todoTitleTextController.text,
+                description: todoDescriptionTextController.text,
               );
-              ref.read(todosControllerProvider.notifier).addNewTodo(newTodo);
-              addNewTodoTextController.clear();
+              ref.read(todosListControllerProvider.notifier).addNewTodo(newTodo);
+              Navigator.pop(context);
             },
             child: const Text('Add todo'),
           ),

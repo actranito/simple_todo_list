@@ -4,16 +4,16 @@ import 'package:todo_list/todos/domain/todo.dart';
 
 final selectedTodoProvider = StateProvider.autoDispose<Todo>((ref) => Todo.newTodo());
 
-final todoTitleTextController = Provider.autoDispose<TextEditingController>(
+final todoTitleTextControllerProvider = Provider.autoDispose<TextEditingController>(
   (ref) {
-    final currentTodo = ref.read(selectedTodoProvider);
+    final currentTodo = ref.watch(selectedTodoProvider);
     return TextEditingController(text: currentTodo.title);
   },
 );
 
-final todoDescriptionTextController = Provider.autoDispose<TextEditingController>(
+final todoDescriptionTextControllerProvider = Provider.autoDispose<TextEditingController>(
   (ref) {
-    final currentTodo = ref.read(selectedTodoProvider);
+    final currentTodo = ref.watch(selectedTodoProvider);
     return TextEditingController(text: currentTodo.description);
   },
 );

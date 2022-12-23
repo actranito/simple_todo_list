@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'todos_controller_state.dart';
+part of 'todos_list_controller_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$TodosControllerState {
+mixin _$TodosListControllerState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
@@ -40,40 +40,40 @@ mixin _$TodosControllerState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_TodosControllerLoadingState value) loading,
-    required TResult Function(_TodosControllerErrorState value) error,
-    required TResult Function(TodosControllerContentState value) content,
+    required TResult Function(_TodosListControllerLoadingState value) loading,
+    required TResult Function(_TodosListControllerErrorState value) error,
+    required TResult Function(TodosListControllerContentState value) content,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_TodosControllerLoadingState value)? loading,
-    TResult? Function(_TodosControllerErrorState value)? error,
-    TResult? Function(TodosControllerContentState value)? content,
+    TResult? Function(_TodosListControllerLoadingState value)? loading,
+    TResult? Function(_TodosListControllerErrorState value)? error,
+    TResult? Function(TodosListControllerContentState value)? content,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_TodosControllerLoadingState value)? loading,
-    TResult Function(_TodosControllerErrorState value)? error,
-    TResult Function(TodosControllerContentState value)? content,
+    TResult Function(_TodosListControllerLoadingState value)? loading,
+    TResult Function(_TodosListControllerErrorState value)? error,
+    TResult Function(TodosListControllerContentState value)? content,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TodosControllerStateCopyWith<$Res> {
-  factory $TodosControllerStateCopyWith(TodosControllerState value,
-          $Res Function(TodosControllerState) then) =
-      _$TodosControllerStateCopyWithImpl<$Res, TodosControllerState>;
+abstract class $TodosListControllerStateCopyWith<$Res> {
+  factory $TodosListControllerStateCopyWith(TodosListControllerState value,
+          $Res Function(TodosListControllerState) then) =
+      _$TodosListControllerStateCopyWithImpl<$Res, TodosListControllerState>;
 }
 
 /// @nodoc
-class _$TodosControllerStateCopyWithImpl<$Res,
-        $Val extends TodosControllerState>
-    implements $TodosControllerStateCopyWith<$Res> {
-  _$TodosControllerStateCopyWithImpl(this._value, this._then);
+class _$TodosListControllerStateCopyWithImpl<$Res,
+        $Val extends TodosListControllerState>
+    implements $TodosListControllerStateCopyWith<$Res> {
+  _$TodosListControllerStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -82,39 +82,40 @@ class _$TodosControllerStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$_TodosControllerLoadingStateCopyWith<$Res> {
-  factory _$$_TodosControllerLoadingStateCopyWith(
-          _$_TodosControllerLoadingState value,
-          $Res Function(_$_TodosControllerLoadingState) then) =
-      __$$_TodosControllerLoadingStateCopyWithImpl<$Res>;
+abstract class _$$_TodosListControllerLoadingStateCopyWith<$Res> {
+  factory _$$_TodosListControllerLoadingStateCopyWith(
+          _$_TodosListControllerLoadingState value,
+          $Res Function(_$_TodosListControllerLoadingState) then) =
+      __$$_TodosListControllerLoadingStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_TodosControllerLoadingStateCopyWithImpl<$Res>
-    extends _$TodosControllerStateCopyWithImpl<$Res,
-        _$_TodosControllerLoadingState>
-    implements _$$_TodosControllerLoadingStateCopyWith<$Res> {
-  __$$_TodosControllerLoadingStateCopyWithImpl(
-      _$_TodosControllerLoadingState _value,
-      $Res Function(_$_TodosControllerLoadingState) _then)
+class __$$_TodosListControllerLoadingStateCopyWithImpl<$Res>
+    extends _$TodosListControllerStateCopyWithImpl<$Res,
+        _$_TodosListControllerLoadingState>
+    implements _$$_TodosListControllerLoadingStateCopyWith<$Res> {
+  __$$_TodosListControllerLoadingStateCopyWithImpl(
+      _$_TodosListControllerLoadingState _value,
+      $Res Function(_$_TodosListControllerLoadingState) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_TodosControllerLoadingState implements _TodosControllerLoadingState {
-  const _$_TodosControllerLoadingState();
+class _$_TodosListControllerLoadingState
+    implements _TodosListControllerLoadingState {
+  const _$_TodosListControllerLoadingState();
 
   @override
   String toString() {
-    return 'TodosControllerState.loading()';
+    return 'TodosListControllerState.loading()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TodosControllerLoadingState);
+            other is _$_TodosListControllerLoadingState);
   }
 
   @override
@@ -157,9 +158,9 @@ class _$_TodosControllerLoadingState implements _TodosControllerLoadingState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_TodosControllerLoadingState value) loading,
-    required TResult Function(_TodosControllerErrorState value) error,
-    required TResult Function(TodosControllerContentState value) content,
+    required TResult Function(_TodosListControllerLoadingState value) loading,
+    required TResult Function(_TodosListControllerErrorState value) error,
+    required TResult Function(TodosListControllerContentState value) content,
   }) {
     return loading(this);
   }
@@ -167,9 +168,9 @@ class _$_TodosControllerLoadingState implements _TodosControllerLoadingState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_TodosControllerLoadingState value)? loading,
-    TResult? Function(_TodosControllerErrorState value)? error,
-    TResult? Function(TodosControllerContentState value)? content,
+    TResult? Function(_TodosListControllerLoadingState value)? loading,
+    TResult? Function(_TodosListControllerErrorState value)? error,
+    TResult? Function(TodosListControllerContentState value)? content,
   }) {
     return loading?.call(this);
   }
@@ -177,9 +178,9 @@ class _$_TodosControllerLoadingState implements _TodosControllerLoadingState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_TodosControllerLoadingState value)? loading,
-    TResult Function(_TodosControllerErrorState value)? error,
-    TResult Function(TodosControllerContentState value)? content,
+    TResult Function(_TodosListControllerLoadingState value)? loading,
+    TResult Function(_TodosListControllerErrorState value)? error,
+    TResult Function(TodosListControllerContentState value)? content,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -189,44 +190,47 @@ class _$_TodosControllerLoadingState implements _TodosControllerLoadingState {
   }
 }
 
-abstract class _TodosControllerLoadingState implements TodosControllerState {
-  const factory _TodosControllerLoadingState() = _$_TodosControllerLoadingState;
+abstract class _TodosListControllerLoadingState
+    implements TodosListControllerState {
+  const factory _TodosListControllerLoadingState() =
+      _$_TodosListControllerLoadingState;
 }
 
 /// @nodoc
-abstract class _$$_TodosControllerErrorStateCopyWith<$Res> {
-  factory _$$_TodosControllerErrorStateCopyWith(
-          _$_TodosControllerErrorState value,
-          $Res Function(_$_TodosControllerErrorState) then) =
-      __$$_TodosControllerErrorStateCopyWithImpl<$Res>;
+abstract class _$$_TodosListControllerErrorStateCopyWith<$Res> {
+  factory _$$_TodosListControllerErrorStateCopyWith(
+          _$_TodosListControllerErrorState value,
+          $Res Function(_$_TodosListControllerErrorState) then) =
+      __$$_TodosListControllerErrorStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_TodosControllerErrorStateCopyWithImpl<$Res>
-    extends _$TodosControllerStateCopyWithImpl<$Res,
-        _$_TodosControllerErrorState>
-    implements _$$_TodosControllerErrorStateCopyWith<$Res> {
-  __$$_TodosControllerErrorStateCopyWithImpl(
-      _$_TodosControllerErrorState _value,
-      $Res Function(_$_TodosControllerErrorState) _then)
+class __$$_TodosListControllerErrorStateCopyWithImpl<$Res>
+    extends _$TodosListControllerStateCopyWithImpl<$Res,
+        _$_TodosListControllerErrorState>
+    implements _$$_TodosListControllerErrorStateCopyWith<$Res> {
+  __$$_TodosListControllerErrorStateCopyWithImpl(
+      _$_TodosListControllerErrorState _value,
+      $Res Function(_$_TodosListControllerErrorState) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_TodosControllerErrorState implements _TodosControllerErrorState {
-  const _$_TodosControllerErrorState();
+class _$_TodosListControllerErrorState
+    implements _TodosListControllerErrorState {
+  const _$_TodosListControllerErrorState();
 
   @override
   String toString() {
-    return 'TodosControllerState.error()';
+    return 'TodosListControllerState.error()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TodosControllerErrorState);
+            other is _$_TodosListControllerErrorState);
   }
 
   @override
@@ -269,9 +273,9 @@ class _$_TodosControllerErrorState implements _TodosControllerErrorState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_TodosControllerLoadingState value) loading,
-    required TResult Function(_TodosControllerErrorState value) error,
-    required TResult Function(TodosControllerContentState value) content,
+    required TResult Function(_TodosListControllerLoadingState value) loading,
+    required TResult Function(_TodosListControllerErrorState value) error,
+    required TResult Function(TodosListControllerContentState value) content,
   }) {
     return error(this);
   }
@@ -279,9 +283,9 @@ class _$_TodosControllerErrorState implements _TodosControllerErrorState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_TodosControllerLoadingState value)? loading,
-    TResult? Function(_TodosControllerErrorState value)? error,
-    TResult? Function(TodosControllerContentState value)? content,
+    TResult? Function(_TodosListControllerLoadingState value)? loading,
+    TResult? Function(_TodosListControllerErrorState value)? error,
+    TResult? Function(TodosListControllerContentState value)? content,
   }) {
     return error?.call(this);
   }
@@ -289,9 +293,9 @@ class _$_TodosControllerErrorState implements _TodosControllerErrorState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_TodosControllerLoadingState value)? loading,
-    TResult Function(_TodosControllerErrorState value)? error,
-    TResult Function(TodosControllerContentState value)? content,
+    TResult Function(_TodosListControllerLoadingState value)? loading,
+    TResult Function(_TodosListControllerErrorState value)? error,
+    TResult Function(TodosListControllerContentState value)? content,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -301,28 +305,30 @@ class _$_TodosControllerErrorState implements _TodosControllerErrorState {
   }
 }
 
-abstract class _TodosControllerErrorState implements TodosControllerState {
-  const factory _TodosControllerErrorState() = _$_TodosControllerErrorState;
+abstract class _TodosListControllerErrorState
+    implements TodosListControllerState {
+  const factory _TodosListControllerErrorState() =
+      _$_TodosListControllerErrorState;
 }
 
 /// @nodoc
-abstract class _$$TodosControllerContentStateCopyWith<$Res> {
-  factory _$$TodosControllerContentStateCopyWith(
-          _$TodosControllerContentState value,
-          $Res Function(_$TodosControllerContentState) then) =
-      __$$TodosControllerContentStateCopyWithImpl<$Res>;
+abstract class _$$TodosListControllerContentStateCopyWith<$Res> {
+  factory _$$TodosListControllerContentStateCopyWith(
+          _$TodosListControllerContentState value,
+          $Res Function(_$TodosListControllerContentState) then) =
+      __$$TodosListControllerContentStateCopyWithImpl<$Res>;
   @useResult
   $Res call({List<Todo> todosList});
 }
 
 /// @nodoc
-class __$$TodosControllerContentStateCopyWithImpl<$Res>
-    extends _$TodosControllerStateCopyWithImpl<$Res,
-        _$TodosControllerContentState>
-    implements _$$TodosControllerContentStateCopyWith<$Res> {
-  __$$TodosControllerContentStateCopyWithImpl(
-      _$TodosControllerContentState _value,
-      $Res Function(_$TodosControllerContentState) _then)
+class __$$TodosListControllerContentStateCopyWithImpl<$Res>
+    extends _$TodosListControllerStateCopyWithImpl<$Res,
+        _$TodosListControllerContentState>
+    implements _$$TodosListControllerContentStateCopyWith<$Res> {
+  __$$TodosListControllerContentStateCopyWithImpl(
+      _$TodosListControllerContentState _value,
+      $Res Function(_$TodosListControllerContentState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -330,7 +336,7 @@ class __$$TodosControllerContentStateCopyWithImpl<$Res>
   $Res call({
     Object? todosList = null,
   }) {
-    return _then(_$TodosControllerContentState(
+    return _then(_$TodosListControllerContentState(
       todosList: null == todosList
           ? _value._todosList
           : todosList // ignore: cast_nullable_to_non_nullable
@@ -341,8 +347,9 @@ class __$$TodosControllerContentStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TodosControllerContentState implements TodosControllerContentState {
-  const _$TodosControllerContentState({required final List<Todo> todosList})
+class _$TodosListControllerContentState
+    implements TodosListControllerContentState {
+  const _$TodosListControllerContentState({required final List<Todo> todosList})
       : _todosList = todosList;
 
   final List<Todo> _todosList;
@@ -355,14 +362,14 @@ class _$TodosControllerContentState implements TodosControllerContentState {
 
   @override
   String toString() {
-    return 'TodosControllerState.content(todosList: $todosList)';
+    return 'TodosListControllerState.content(todosList: $todosList)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TodosControllerContentState &&
+            other is _$TodosListControllerContentState &&
             const DeepCollectionEquality()
                 .equals(other._todosList, _todosList));
   }
@@ -374,9 +381,9 @@ class _$TodosControllerContentState implements TodosControllerContentState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$TodosControllerContentStateCopyWith<_$TodosControllerContentState>
-      get copyWith => __$$TodosControllerContentStateCopyWithImpl<
-          _$TodosControllerContentState>(this, _$identity);
+  _$$TodosListControllerContentStateCopyWith<_$TodosListControllerContentState>
+      get copyWith => __$$TodosListControllerContentStateCopyWithImpl<
+          _$TodosListControllerContentState>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -415,9 +422,9 @@ class _$TodosControllerContentState implements TodosControllerContentState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_TodosControllerLoadingState value) loading,
-    required TResult Function(_TodosControllerErrorState value) error,
-    required TResult Function(TodosControllerContentState value) content,
+    required TResult Function(_TodosListControllerLoadingState value) loading,
+    required TResult Function(_TodosListControllerErrorState value) error,
+    required TResult Function(TodosListControllerContentState value) content,
   }) {
     return content(this);
   }
@@ -425,9 +432,9 @@ class _$TodosControllerContentState implements TodosControllerContentState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_TodosControllerLoadingState value)? loading,
-    TResult? Function(_TodosControllerErrorState value)? error,
-    TResult? Function(TodosControllerContentState value)? content,
+    TResult? Function(_TodosListControllerLoadingState value)? loading,
+    TResult? Function(_TodosListControllerErrorState value)? error,
+    TResult? Function(TodosListControllerContentState value)? content,
   }) {
     return content?.call(this);
   }
@@ -435,9 +442,9 @@ class _$TodosControllerContentState implements TodosControllerContentState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_TodosControllerLoadingState value)? loading,
-    TResult Function(_TodosControllerErrorState value)? error,
-    TResult Function(TodosControllerContentState value)? content,
+    TResult Function(_TodosListControllerLoadingState value)? loading,
+    TResult Function(_TodosListControllerErrorState value)? error,
+    TResult Function(TodosListControllerContentState value)? content,
     required TResult orElse(),
   }) {
     if (content != null) {
@@ -447,12 +454,14 @@ class _$TodosControllerContentState implements TodosControllerContentState {
   }
 }
 
-abstract class TodosControllerContentState implements TodosControllerState {
-  const factory TodosControllerContentState(
-      {required final List<Todo> todosList}) = _$TodosControllerContentState;
+abstract class TodosListControllerContentState
+    implements TodosListControllerState {
+  const factory TodosListControllerContentState(
+          {required final List<Todo> todosList}) =
+      _$TodosListControllerContentState;
 
   List<Todo> get todosList;
   @JsonKey(ignore: true)
-  _$$TodosControllerContentStateCopyWith<_$TodosControllerContentState>
+  _$$TodosListControllerContentStateCopyWith<_$TodosListControllerContentState>
       get copyWith => throw _privateConstructorUsedError;
 }

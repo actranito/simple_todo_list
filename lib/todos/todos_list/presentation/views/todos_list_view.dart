@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_list/todos/presentation/controllers/todos_controller.dart';
-import 'package:todo_list/todos/presentation/widgets/todo_full_info_modal.dart';
-import 'package:todo_list/todos/presentation/widgets/todo_item.dart';
+import 'package:todo_list/todos/edit_todo/presentation/widgets/edit_todo_info_modal.dart';
+import 'package:todo_list/todos/todos_list/presentation/widgets/todo_list_item.dart';
+import 'package:todo_list/todos/todos_list/presentation/controllers/todos_list_controller.dart';
 
-class TodosView extends ConsumerWidget {
-  const TodosView({super.key});
+class TodosListView extends ConsumerWidget {
+  const TodosListView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final todosController = ref.watch(todosControllerProvider);
+    final todosController = ref.watch(todosListControllerProvider);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Todos'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => TodoFullInfoModal.show(context: context, ref: ref),
+        onPressed: () => EditTodoInfoModal.show(context: context, ref: ref),
         child: const Icon(Icons.add),
       ),
       body: todosController.map(
@@ -28,7 +28,7 @@ class TodosView extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(vertical: 16),
             itemCount: todos.length,
             separatorBuilder: (_, __) => const Divider(),
-            itemBuilder: (_, i) => TodoItem(todo: todos[i]),
+            itemBuilder: (_, i) => TodoListItem(todo: todos[i]),
           );
         },
       ),

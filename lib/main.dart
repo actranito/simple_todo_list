@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list/core/constants/app_color.dart';
-import 'package:todo_list/todos/presentation/views/todos_view.dart';
+import 'package:todo_list/todos/todos_list/presentation/views/todos_list_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: AppColor.mainColor,
         ),
         debugShowCheckedModeBanner: false,
-        home: const TodosView(),
+        home: const TodosListView(),
       ),
     );
   }

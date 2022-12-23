@@ -3,13 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list/core/constants/app_color.dart';
 import 'package:todo_list/core/constants/app_text_style.dart';
 import 'package:todo_list/todos/domain/todo.dart';
-import 'package:todo_list/todos/presentation/controllers/todos_controller.dart';
-import 'package:todo_list/todos/presentation/widgets/completed_indicator.dart';
-import 'package:todo_list/todos/presentation/widgets/todo_full_info_modal.dart';
+import 'package:todo_list/todos/todos_list/presentation/widgets/completed_indicator.dart';
+import 'package:todo_list/todos/edit_todo/presentation/widgets/edit_todo_info_modal.dart';
+import 'package:todo_list/todos/todos_list/presentation/controllers/todos_list_controller.dart';
 
-class TodoItem extends ConsumerWidget {
+class TodoListItem extends ConsumerWidget {
   final Todo todo;
-  const TodoItem({
+  const TodoListItem({
     super.key,
     required this.todo,
   });
@@ -17,7 +17,11 @@ class TodoItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
-      onTap: () => TodoFullInfoModal.show(context: context, ref: ref),
+      onTap: () => EditTodoInfoModal.show(
+        context: context,
+        ref: ref,
+        originalTodo: todo,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,7 +29,7 @@ class TodoItem extends ConsumerWidget {
           const SizedBox(width: 8),
           CompletedIndicator(
             completed: todo.completed,
-            onTap: () => ref.read(todosControllerProvider.notifier).toggleCompleted(todo.id),
+            onTap: () => ref.read(todosListControllerProvider.notifier).toggleCompleted(todo.id),
           ),
           const SizedBox(width: 8),
           Expanded(
