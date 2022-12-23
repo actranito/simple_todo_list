@@ -67,6 +67,33 @@ class TodosListController extends StateNotifier<TodosListControllerState> {
     state = currentState.copyWith(todosList: newTodosList);
   }
 
+  void updateTodo(Todo updatedTodo) {
+    final currentState = state;
+    if (currentState is! TodosListControllerContentState) {
+      // If we are not in the correct state, return.
+      // TODO - add error toast
+      return;
+    }
+
+    // Locate the index on the list and replace it with the new one
+
+    // Get the index of the Todo to update
+    final todoIndex = currentState.todosList.indexWhere((iterableTodo) => iterableTodo.id == updatedTodo.id);
+    if (todoIndex == -1) {
+      // If the index is '-1' no matchinf item was found, so we return without doing anything
+      // TODO - add error toast
+      return;
+    }
+
+    // Create a copy of the todosList and replace the new item
+    final newTodosList = List<Todo>.from(currentState.todosList);
+    newTodosList.removeAt(todoIndex);
+    newTodosList.insert(todoIndex, updatedTodo);
+
+    // Emit the state with the new list
+    state = currentState.copyWith(todosList: newTodosList);
+  }
+
   // INTERNAL METHODS
   Future<void> _intialize() async {
     final initialTodos = [

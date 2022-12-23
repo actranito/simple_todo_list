@@ -16,23 +16,24 @@ class TodoListItem extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return GestureDetector(
-      onTap: () => EditTodoInfoModal.show(
-        context: context,
-        ref: ref,
-        originalTodo: todo,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(width: 8),
-          CompletedIndicator(
-            completed: todo.completed,
-            onTap: () => ref.read(todosListControllerProvider.notifier).toggleCompleted(todo.id),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(width: 8),
+        CompletedIndicator(
+          completed: todo.completed,
+          onTap: () => ref.read(todosListControllerProvider.notifier).toggleCompleted(todo.id),
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => EditTodoInfoModal.show(
+              context: context,
+              ref: ref,
+              originalTodo: todo,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -58,8 +59,8 @@ class TodoListItem extends ConsumerWidget {
               ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
