@@ -2,23 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list/todos/domain/todo.dart';
 import 'package:todo_list/todos/presentation/controllers/todos_controller.dart';
-import 'package:todo_list/todos/providers/add_new_todo_text_controller_provider.dart';
+import 'package:todo_list/todos/providers/todo_full_info_modal_providers.dart';
 
-class AddNewTodo extends ConsumerWidget {
-  const AddNewTodo({super.key});
+class TodoFullInfoModal extends ConsumerWidget {
+  const TodoFullInfoModal({super.key});
 
-  static void show(BuildContext context) {
+  static void show({
+    required BuildContext context,
+    required WidgetRef ref,
+    Todo? originalTodo,
+  }) {
+    if (originalTodo != null) {
+      ref.read(selectedTodoProvider.notifier).state = originalTodo;
+    }
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      builder: (_) => const AddNewTodo(),
+      builder: (_) => const TodoFullInfoModal(),
     );
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bottomInsets = MediaQuery.of(context).viewInsets.bottom;
-    final addNewTodoTextController = ref.watch(addNewTodoTextControllerProvider);
+    final addNewTodoTextController = ref.watch(todoTitleTextController);
 
     return SizedBox(
       child: Column(
@@ -44,6 +51,7 @@ class AddNewTodo extends ConsumerWidget {
             onPressed: () {
               final newTodo = Todo(
                 title: addNewTodoTextController.text,
+                description: '',
               );
               ref.read(todosControllerProvider.notifier).addNewTodo(newTodo);
               addNewTodoTextController.clear();

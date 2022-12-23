@@ -8,8 +8,11 @@ class Todo with _$Todo {
   const factory Todo({
     String? id,
     required String title,
+    String? description,
     @Default(false) bool completed,
   }) = _TODO;
 
   factory Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
+
+  factory Todo.newTodo() => const Todo(title: '');
 }

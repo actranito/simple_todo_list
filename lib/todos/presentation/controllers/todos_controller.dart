@@ -12,9 +12,9 @@ class TodosController extends StateNotifier<TodosControllerState> {
     _intialize();
   }
 
-  void toggleCompleted(Todo todo) {
+  void toggleCompleted(String? todoId) {
     final currentState = state;
-    if (currentState is! TodosControllerContentState) {
+    if (currentState is! TodosControllerContentState || todoId == null) {
       // If we are not in the correct state, return.
       // TODO - add error toast
       return;
@@ -24,13 +24,15 @@ class TodosController extends StateNotifier<TodosControllerState> {
     // in the correct place on the list
 
     // Get the index of the Todo to toggle
-    final todoIndex = currentState.todosList.indexWhere((iterableTodo) => iterableTodo.id == todo.id);
+    final todoIndex = currentState.todosList.indexWhere((iterableTodo) => iterableTodo.id == todoId);
     if (todoIndex == -1) {
       // If the index is '-1' no matchinf item was found, so we return without doing anything
       // TODO - add error toast
       return;
     }
 
+    // Get current todo
+    final todo = currentState.todosList[todoIndex];
     // Create a new Todo Item with the 'completed' field inverted
     final newTodoState = todo.copyWith(completed: !todo.completed);
 
@@ -72,16 +74,24 @@ class TodosController extends StateNotifier<TodosControllerState> {
         "id": "1",
         "title": "quis ut nam facilis et officia qui",
         "completed": false,
+        "description":
+            "quis ut nam facilis et officia qui quis ut nam facilis et officia qui quis ut nam facilis et officia qui"
       },
       {
         "id": "2",
         "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
         "completed": false,
+        "description":
+            "quis ut nam facilis et officia qui quis ut nam facilis et officia qui quis ut nam facilis et officia qui" *
+                3
       },
       {
         "id": "3",
         "title": "qui ullam ratione quibusdam voluptatem quia omnis",
         "completed": false,
+        "description":
+            "quis ut nam facilis et officia qui quis ut nam facilis et officia qui quis ut nam facilis et officia qui" *
+                2
       }
     ];
 
