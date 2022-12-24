@@ -1,14 +1,18 @@
-import 'dart:math';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list/todos/domain/todo.dart';
+import 'package:todo_list/todos/todos_list/data/todos_list_repository.dart';
 import 'package:todo_list/todos/todos_list/presentation/controllers/todos_list_controller_state.dart';
+import 'package:uuid/uuid.dart';
 
-final todosListControllerProvider =
-    StateNotifierProvider.autoDispose<TodosListController, TodosListControllerState>((ref) => TodosListController());
+final todosListControllerProvider = StateNotifierProvider.autoDispose<TodosListController, TodosListControllerState>(
+  (ref) => TodosListController(todosListRepository: ref.watch(todosListRepositoryProvider)),
+);
 
 class TodosListController extends StateNotifier<TodosListControllerState> {
-  TodosListController() : super(const TodosListControllerState.loading()) {
+  final TodosListRepository todosListRepository;
+  TodosListController({
+    required this.todosListRepository,
+  }) : super(const TodosListControllerState.loading()) {
     _intialize();
   }
 
@@ -54,17 +58,13 @@ class TodosListController extends StateNotifier<TodosListControllerState> {
     }
 
     // Generate and add an id to the new todo
-    // TODO - replace with uuid library
-    final id = Random().nextInt(10000).toString();
+    final id = const Uuid().v4();
     final newTodo = todo.copyWith(id: id);
 
-    // Make a copy of the current todos list
-    final newTodosList = List<Todo>.from(currentState.todosList);
-    // Add the new todo item to the list
-    newTodosList.add(newTodo);
+    todosListRepository.addNewTodo(newTodo);
 
     // Emit the state with the new todo item
-    state = currentState.copyWith(todosList: newTodosList);
+    // state = currentState.copyWith(todosList: newTodosList);
   }
 
   void updateTodo(Todo updatedTodo) {
@@ -96,39 +96,8 @@ class TodosListController extends StateNotifier<TodosListControllerState> {
 
   // INTERNAL METHODS
   Future<void> _intialize() async {
-    final initialTodos = [
-      {
-        "id": "1",
-        "title": "quis ut nam facilis et officia qui",
-        "completed": false,
-        "description":
-            "quis ut nam facilis et officia qui quis ut nam facilis et officia qui quis ut nam facilis et officia qui"
-      },
-      {
-        "id": "2",
-        "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
-        "completed": false,
-        "description":
-            "quis ut nam facilis et officia qui quis ut nam facilis et officia qui quis ut nam facilis et officia qui" *
-                3
-      },
-      {
-        "id": "3",
-        "title": "qui ullam ratione quibusdam voluptatem quia omnis",
-        "completed": false,
-        "description":
-            "quis ut nam facilis et officia qui quis ut nam facilis et officia qui quis ut nam facilis et officia qui" *
-                2
-      }
-    ];
-
     try {
-      final todosList = <Todo>[];
-      for (final todo in initialTodos) {
-        todosList.add(Todo.fromJson(todo));
-      }
-
-      await Future.delayed(const Duration(seconds: 2));
+      final todosList = await todosListRepository.getTodosList();
       state = TodosListControllerState.content(todosList: todosList);
     } catch (e) {
       state = const TodosListControllerState.error();

@@ -14,6 +14,7 @@ class TodosListView extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Todos'),
+        centerTitle: true,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => EditTodoInfoModal.show(context: context, ref: ref),
