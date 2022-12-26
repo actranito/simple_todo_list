@@ -19,6 +19,7 @@ class TodosListRepositoryHiveImpl extends TodosListRepository {
       todosList.add(Todo.fromJson(todo));
     }
 
+    todosList.sort((a, b) => a.dateCreated.compareTo(b.dateCreated));
     return todosList;
   }
 

@@ -10,9 +10,13 @@ class Todo with _$Todo {
     required String title,
     String? description,
     @Default(false) bool completed,
+    required DateTime dateCreated,
   }) = _TODO;
 
   factory Todo.fromJson(Map<String, dynamic> json) => _$TodoFromJson(json);
 
-  factory Todo.newTodo() => const Todo(title: '');
+  factory Todo.newTodo() => Todo(
+        title: '',
+        dateCreated: DateTime.now(),
+      );
 }

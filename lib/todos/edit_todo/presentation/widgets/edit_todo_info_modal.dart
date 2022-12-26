@@ -93,6 +93,7 @@ class EditTodoInfoModal extends ConsumerWidget {
                         final newTodo = Todo(
                           title: todoTitleTextController.text,
                           description: todoDescriptionTextController.text,
+                          dateCreated: DateTime.now(),
                         );
                         ref.read(todosListControllerProvider.notifier).addNewTodo(newTodo);
                       } else {

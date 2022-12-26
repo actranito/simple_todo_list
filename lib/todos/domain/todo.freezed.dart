@@ -24,6 +24,7 @@ mixin _$Todo {
   String get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   bool get completed => throw _privateConstructorUsedError;
+  DateTime get dateCreated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,12 @@ abstract class $TodoCopyWith<$Res> {
   factory $TodoCopyWith(Todo value, $Res Function(Todo) then) =
       _$TodoCopyWithImpl<$Res, Todo>;
   @useResult
-  $Res call({String? id, String title, String? description, bool completed});
+  $Res call(
+      {String? id,
+      String title,
+      String? description,
+      bool completed,
+      DateTime dateCreated});
 }
 
 /// @nodoc
@@ -55,6 +61,7 @@ class _$TodoCopyWithImpl<$Res, $Val extends Todo>
     Object? title = null,
     Object? description = freezed,
     Object? completed = null,
+    Object? dateCreated = null,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -73,6 +80,10 @@ class _$TodoCopyWithImpl<$Res, $Val extends Todo>
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
               as bool,
+      dateCreated: null == dateCreated
+          ? _value.dateCreated
+          : dateCreated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -83,7 +94,12 @@ abstract class _$$_TODOCopyWith<$Res> implements $TodoCopyWith<$Res> {
       __$$_TODOCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? id, String title, String? description, bool completed});
+  $Res call(
+      {String? id,
+      String title,
+      String? description,
+      bool completed,
+      DateTime dateCreated});
 }
 
 /// @nodoc
@@ -99,6 +115,7 @@ class __$$_TODOCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_TODO>
     Object? title = null,
     Object? description = freezed,
     Object? completed = null,
+    Object? dateCreated = null,
   }) {
     return _then(_$_TODO(
       id: freezed == id
@@ -117,6 +134,10 @@ class __$$_TODOCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_TODO>
           ? _value.completed
           : completed // ignore: cast_nullable_to_non_nullable
               as bool,
+      dateCreated: null == dateCreated
+          ? _value.dateCreated
+          : dateCreated // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -125,7 +146,11 @@ class __$$_TODOCopyWithImpl<$Res> extends _$TodoCopyWithImpl<$Res, _$_TODO>
 @JsonSerializable()
 class _$_TODO implements _TODO {
   const _$_TODO(
-      {this.id, required this.title, this.description, this.completed = false});
+      {this.id,
+      required this.title,
+      this.description,
+      this.completed = false,
+      required this.dateCreated});
 
   factory _$_TODO.fromJson(Map<String, dynamic> json) => _$$_TODOFromJson(json);
 
@@ -138,10 +163,12 @@ class _$_TODO implements _TODO {
   @override
   @JsonKey()
   final bool completed;
+  @override
+  final DateTime dateCreated;
 
   @override
   String toString() {
-    return 'Todo(id: $id, title: $title, description: $description, completed: $completed)';
+    return 'Todo(id: $id, title: $title, description: $description, completed: $completed, dateCreated: $dateCreated)';
   }
 
   @override
@@ -154,13 +181,15 @@ class _$_TODO implements _TODO {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.completed, completed) ||
-                other.completed == completed));
+                other.completed == completed) &&
+            (identical(other.dateCreated, dateCreated) ||
+                other.dateCreated == dateCreated));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, title, description, completed);
+      Object.hash(runtimeType, id, title, description, completed, dateCreated);
 
   @JsonKey(ignore: true)
   @override
@@ -181,7 +210,8 @@ abstract class _TODO implements Todo {
       {final String? id,
       required final String title,
       final String? description,
-      final bool completed}) = _$_TODO;
+      final bool completed,
+      required final DateTime dateCreated}) = _$_TODO;
 
   factory _TODO.fromJson(Map<String, dynamic> json) = _$_TODO.fromJson;
 
@@ -193,6 +223,8 @@ abstract class _TODO implements Todo {
   String? get description;
   @override
   bool get completed;
+  @override
+  DateTime get dateCreated;
   @override
   @JsonKey(ignore: true)
   _$$_TODOCopyWith<_$_TODO> get copyWith => throw _privateConstructorUsedError;
