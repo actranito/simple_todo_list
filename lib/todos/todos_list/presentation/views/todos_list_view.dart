@@ -29,7 +29,7 @@ class TodosListView extends ConsumerWidget {
           return ListView.separated(
             padding: const EdgeInsets.symmetric(vertical: 16),
             itemCount: todos.length,
-            separatorBuilder: (_, __) => const Divider(),
+            separatorBuilder: (_, __) => const Divider(height: 0),
             itemBuilder: (_, i) => TodoListItem(todo: todos[i]),
           );
         },
