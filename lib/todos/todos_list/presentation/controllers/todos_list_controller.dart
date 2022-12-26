@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hive/hive.dart';
+import 'package:todo_list/core/constants/app_string.dart';
 import 'package:todo_list/todos/domain/todo.dart';
 import 'package:todo_list/todos/todos_list/data/todos_list_repository.dart';
 import 'package:todo_list/todos/todos_list/presentation/controllers/todos_list_controller_state.dart';
@@ -32,7 +34,7 @@ class TodosListController extends StateNotifier<TodosListControllerState> {
     final currentState = state;
     if (currentState is! TodosListControllerContentState || todoId == null) {
       // If we are not in the correct state, return.
-      // TODO - add error toast
+      _showErrorToast();
       return;
     }
 
@@ -43,7 +45,7 @@ class TodosListController extends StateNotifier<TodosListControllerState> {
     final todoIndex = currentState.todosList.indexWhere((iterableTodo) => iterableTodo.id == todoId);
     if (todoIndex == -1) {
       // If the index is '-1' no matchinf item was found, so we return without doing anything
-      // TODO - add error toast
+      _showErrorToast();
       return;
     }
 
@@ -65,7 +67,7 @@ class TodosListController extends StateNotifier<TodosListControllerState> {
     final currentState = state;
     if (currentState is! TodosListControllerContentState) {
       // If we are not in the correct state, return.
-      // TODO - add error toast
+      _showErrorToast();
       return;
     }
 
@@ -83,7 +85,7 @@ class TodosListController extends StateNotifier<TodosListControllerState> {
     final currentState = state;
     if (currentState is! TodosListControllerContentState) {
       // If we are not in the correct state, return.
-      // TODO - add error toast
+      _showErrorToast();
       return;
     }
 
@@ -94,7 +96,7 @@ class TodosListController extends StateNotifier<TodosListControllerState> {
     final currentState = state;
     if (currentState is! TodosListControllerContentState || todoId == null) {
       // If we are not in the correct state, return.
-      // TODO - add error toast
+      _showErrorToast();
       return;
     }
 
@@ -106,7 +108,7 @@ class TodosListController extends StateNotifier<TodosListControllerState> {
     try {
       // add a listener to all the todo update events
       final todoUpdatesStream = await todosListRepository.getTodoUpdatesStream();
-      todoUpdatesSubscription = todoUpdatesStream.listen(todoUpdatesListener);
+      todoUpdatesSubscription = todoUpdatesStream.listen(_todoUpdatesListener);
 
       // Fetch the current version of the todos list and emit a state with it
       final todosList = await todosListRepository.getTodosList();
@@ -116,11 +118,10 @@ class TodosListController extends StateNotifier<TodosListControllerState> {
     }
   }
 
-  void todoUpdatesListener(BoxEvent event) {
+  void _todoUpdatesListener(BoxEvent event) {
     final currentState = state;
     if (currentState is! TodosListControllerContentState) {
       // If we are not in the correct state, return.
-      // TODO - add error toast
       return;
     }
 
@@ -144,5 +145,9 @@ class TodosListController extends StateNotifier<TodosListControllerState> {
 
     state = currentState.copyWith(todosList: newTodosList);
     return;
+  }
+
+  void _showErrorToast() {
+    Fluttertoast.showToast(msg: AppString.somethingWentWrong);
   }
 }
