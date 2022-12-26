@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_list/core/constants/app_string.dart';
 import 'package:todo_list/todos/edit_todo/presentation/widgets/edit_todo_info_modal.dart';
 import 'package:todo_list/todos/todos_list/presentation/widgets/todo_list_item.dart';
 import 'package:todo_list/todos/todos_list/presentation/controllers/todos_list_controller.dart';
@@ -13,7 +14,7 @@ class TodosListView extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Todos'),
+        title: const Text(AppString.todos),
         centerTitle: true,
       ),
       floatingActionButton: FloatingActionButton(

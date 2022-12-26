@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list/core/constants/app_color.dart';
+import 'package:todo_list/core/constants/app_string.dart';
 import 'package:todo_list/core/constants/app_text_style.dart';
 import 'package:todo_list/todos/domain/todo.dart';
 import 'package:todo_list/todos/edit_todo/presentation/controllers/edit_todo_controller.dart';
@@ -55,7 +56,7 @@ class EditTodoInfoModal extends ConsumerWidget {
               textCapitalization: TextCapitalization.sentences,
               style: AppTextStyle.regularText,
               decoration: InputDecoration(
-                hintText: 'Title',
+                hintText: AppString.title,
                 hintStyle: AppTextStyle.regularText.copyWith(color: AppColor.alternateText),
               ),
               minLines: 1,
@@ -71,7 +72,7 @@ class EditTodoInfoModal extends ConsumerWidget {
               textCapitalization: TextCapitalization.sentences,
               style: AppTextStyle.subText.copyWith(color: AppColor.alternateText),
               decoration: InputDecoration(
-                hintText: 'Description',
+                hintText: AppString.description,
                 hintStyle: AppTextStyle.subText.copyWith(
                   color: AppColor.alternateText,
                   fontWeight: FontWeight.w400,
@@ -101,7 +102,7 @@ class EditTodoInfoModal extends ConsumerWidget {
                       Navigator.pop(context);
                     }
                   : null,
-              child: const Text('Save'),
+              child: const Text(AppString.save),
             ),
             const SizedBox(height: 20),
             SizedBox(height: bottomInsets),
