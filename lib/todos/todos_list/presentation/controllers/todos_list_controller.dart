@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive/hive.dart';
 import 'package:todo_list/todos/domain/todo.dart';
 import 'package:todo_list/todos/todos_list/data/todos_list_repository.dart';
 import 'package:todo_list/todos/todos_list/presentation/controllers/todos_list_controller_state.dart';
@@ -10,10 +13,19 @@ final todosListControllerProvider = StateNotifierProvider.autoDispose<TodosListC
 
 class TodosListController extends StateNotifier<TodosListControllerState> {
   final TodosListRepository todosListRepository;
+
+  late final StreamSubscription todoUpdatesSubscription;
+
   TodosListController({
     required this.todosListRepository,
   }) : super(const TodosListControllerState.loading()) {
     _intialize();
+  }
+
+  @override
+  dispose() {
+    todoUpdatesSubscription.cancel();
+    super.dispose();
   }
 
   void toggleCompleted(String? todoId) {
@@ -75,32 +87,62 @@ class TodosListController extends StateNotifier<TodosListControllerState> {
       return;
     }
 
-    // Locate the index on the list and replace it with the new one
+    todosListRepository.updateTodo(updatedTodo);
+  }
 
-    // Get the index of the Todo to update
-    final todoIndex = currentState.todosList.indexWhere((iterableTodo) => iterableTodo.id == updatedTodo.id);
-    if (todoIndex == -1) {
-      // If the index is '-1' no matchinf item was found, so we return without doing anything
+  void deleteTodo(String? todoId) {
+    final currentState = state;
+    if (currentState is! TodosListControllerContentState || todoId == null) {
+      // If we are not in the correct state, return.
       // TODO - add error toast
       return;
     }
 
-    // Create a copy of the todosList and replace the new item
-    final newTodosList = List<Todo>.from(currentState.todosList);
-    newTodosList.removeAt(todoIndex);
-    newTodosList.insert(todoIndex, updatedTodo);
-
-    // Emit the state with the new list
-    state = currentState.copyWith(todosList: newTodosList);
+    todosListRepository.deleteTodo(todoId);
   }
 
   // INTERNAL METHODS
   Future<void> _intialize() async {
     try {
+      // add a listener to all the todo update events
+      final todoUpdatesStream = await todosListRepository.getTodoUpdatesStream();
+      todoUpdatesSubscription = todoUpdatesStream.listen(todoUpdatesListener);
+
+      // Fetch the current version of the todos list and emit a state with it
       final todosList = await todosListRepository.getTodosList();
       state = TodosListControllerState.content(todosList: todosList);
     } catch (e) {
       state = const TodosListControllerState.error();
     }
+  }
+
+  void todoUpdatesListener(BoxEvent event) {
+    final currentState = state;
+    if (currentState is! TodosListControllerContentState) {
+      // If we are not in the correct state, return.
+      // TODO - add error toast
+      return;
+    }
+
+    final newTodosList = List<Todo>.from(currentState.todosList);
+
+    if (event.deleted == true) {
+      newTodosList.removeWhere((element) => element.id == event.key);
+      state = currentState.copyWith(todosList: newTodosList);
+      return;
+    }
+
+    final eventIndex = newTodosList.indexWhere((element) => element.id == event.key);
+    if (eventIndex == -1) {
+      // If eventIndex is '-1' it means there is no corresponding key in the DB, so it must
+      // be a new entry. So we'll add the value to the end of the list
+      newTodosList.add(Todo.fromJson(event.value));
+    } else {
+      // Otherwise just replace the entry with the new value
+      newTodosList[eventIndex] = Todo.fromJson(event.value);
+    }
+
+    state = currentState.copyWith(todosList: newTodosList);
+    return;
   }
 }

@@ -24,6 +24,7 @@ class TodoListItem extends ConsumerWidget {
         CompletedIndicator(
           completed: todo.completed,
           onTap: () => ref.read(todosListControllerProvider.notifier).toggleCompleted(todo.id),
+          // onTap: () => ref.read(todosListControllerProvider.notifier).toggleCompleted(todo.id),
         ),
         const SizedBox(width: 8),
         Expanded(
@@ -34,6 +35,8 @@ class TodoListItem extends ConsumerWidget {
               ref: ref,
               originalTodo: todo,
             ),
+            // TODO - change the way we delete the TODOS
+            onLongPress: () => ref.read(todosListControllerProvider.notifier).deleteTodo(todo.id),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
