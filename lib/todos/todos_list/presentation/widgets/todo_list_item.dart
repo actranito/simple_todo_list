@@ -40,7 +40,7 @@ class TodoListItem extends ConsumerWidget {
             const SizedBox(width: 8),
             CompletedIndicator(
               completed: todo.completed,
-              onTap: () => ref.read(todosListControllerProvider.notifier).toggleCompleted(todo.id),
+              onTap: () => ref.read(todosListControllerProvider.notifier).toggleCompleted(todo),
             ),
             const SizedBox(width: 8),
             Expanded(

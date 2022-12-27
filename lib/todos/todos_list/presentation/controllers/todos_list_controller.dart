@@ -30,37 +30,15 @@ class TodosListController extends StateNotifier<TodosListControllerState> {
     super.dispose();
   }
 
-  void toggleCompleted(String? todoId) {
+  void toggleCompleted(Todo todo) {
     final currentState = state;
-    if (currentState is! TodosListControllerContentState || todoId == null) {
+    if (currentState is! TodosListControllerContentState || todo.id == null) {
       // If we are not in the correct state, return.
       _showErrorToast();
       return;
     }
 
-    // We will create a new instance of Todo with the 'completed' field inverted and insert it
-    // in the correct place on the list
-
-    // Get the index of the Todo to toggle
-    final todoIndex = currentState.todosList.indexWhere((iterableTodo) => iterableTodo.id == todoId);
-    if (todoIndex == -1) {
-      // If the index is '-1' no matchinf item was found, so we return without doing anything
-      _showErrorToast();
-      return;
-    }
-
-    // Get current todo
-    final todo = currentState.todosList[todoIndex];
-    // Create a new Todo Item with the 'completed' field inverted
-    final newTodoState = todo.copyWith(completed: !todo.completed);
-
-    // Create a copy of the todosList and replace the new item
-    final newTodosList = List<Todo>.from(currentState.todosList);
-    newTodosList.removeAt(todoIndex);
-    newTodosList.insert(todoIndex, newTodoState);
-
-    // Emit the state with the new list
-    state = currentState.copyWith(todosList: newTodosList);
+    todosListRepository.toggleTodo(todo);
   }
 
   void addNewTodo(Todo todo) {
@@ -76,9 +54,6 @@ class TodosListController extends StateNotifier<TodosListControllerState> {
     final newTodo = todo.copyWith(id: id);
 
     todosListRepository.addNewTodo(newTodo);
-
-    // Emit the state with the new todo item
-    // state = currentState.copyWith(todosList: newTodosList);
   }
 
   void updateTodo(Todo updatedTodo) {

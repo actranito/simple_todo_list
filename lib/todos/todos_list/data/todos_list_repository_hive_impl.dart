@@ -57,6 +57,17 @@ class TodosListRepositoryHiveImpl extends TodosListRepository {
   }
 
   @override
+  Future<bool> toggleTodo(Todo todo) async {
+    try {
+      // Create a new copy of the todo with the completed field toggled
+      final newTodo = todo.copyWith(completed: !todo.completed);
+      return updateTodo(newTodo);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  @override
   Future<Stream<BoxEvent>> getTodoUpdatesStream() async {
     final todosBox = await Hive.openBox<Map<dynamic, dynamic>>(_todosBox);
     return todosBox.watch();

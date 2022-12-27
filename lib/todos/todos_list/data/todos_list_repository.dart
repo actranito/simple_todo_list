@@ -16,6 +16,8 @@ abstract class TodosListRepository {
 
   Future<bool> deleteTodo(String todoId);
 
+  Future<bool> toggleTodo(Todo todo);
+
   // Returns a stream of BoxEvents everytime the info about a todo changes
   Future<Stream<BoxEvent>> getTodoUpdatesStream();
 }
